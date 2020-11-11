@@ -1,14 +1,26 @@
-
 import React from 'react'
+import Contact from "./Contact/Contact";
 
-const Contacts = () => {
+
+const Contacts = (props) => {
+
+    const contactsArray = props.usersContacts.map(contact => {
+        return <Contact
+            key={contact.id}
+            name={contact.name}
+            username={contact.username}
+            email={contact.email}
+        />
+    })
+
 
     return (
         <div className="Contacts">
-            <h1> Книга контактов
-            </h1>
+            <ul>
+                {contactsArray}
+            </ul>
         </div>
-    );
+    )
 }
 
-export default Contacts;
+export default Contacts

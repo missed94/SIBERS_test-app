@@ -4,7 +4,7 @@ const SET_CONTACTS = 'SET_CONTACTS';
 
 
 let initialState = {
-    contacts: [],
+    usersContacts: [],
 };
 
 
@@ -13,7 +13,7 @@ export const contactsReducer = (state = initialState, action) => {
         case SET_CONTACTS: {
             return {
                 ...state,
-                contacts: action.contacts
+                usersContacts: action.usersContacts
             }
         }
         default:
@@ -22,14 +22,14 @@ export const contactsReducer = (state = initialState, action) => {
 }
 
 
-const setUsers = (contacts) => ({
+const setUsers = (usersContacts) => ({
     type: SET_CONTACTS,
-    contacts
+    usersContacts
 });
 
 export const getContacts = () => {
     return async (dispatch) => {
         let data = await contactsAPI.getContacts()
-            dispatch(setUsers(data))
+        dispatch(setUsers(data))
     }
 }

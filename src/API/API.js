@@ -2,12 +2,9 @@ import axios from "axios";
 
 
 
-   const baseURL = 'http://hr.sibers.com/Frontend-test.pdf'
-
-
 export const contactsAPI = {
     getContacts() {
-        return axios.get(baseURL)
+        return axios.get('http://demo.sibers.com/users')
             .then(response => {
                 return response.data
             });

@@ -1,12 +1,12 @@
 import './App.scss';
 import React from 'react'
-import Contacts from "./components/Contacts/Contacts";
+import ContactsContainer from "./components/Contacts/ContactsContainer";
 
 const App = () => {
 
     return (
         <div className="App">
-           <Contacts />
+           <ContactsContainer />
         </div>
     );
 }
