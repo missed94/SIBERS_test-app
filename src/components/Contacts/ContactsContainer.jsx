@@ -2,7 +2,7 @@
 import React from 'react'
 import Contacts from "./Contacts";
 import {connect} from "react-redux";
-import {getContacts} from "../../redux/reducers/contacts-reducer";
+import {getContacts, getUpdateContact} from "../../redux/reducers/contacts-reducer";
 
 
 class ContactsContainer extends React.Component {
@@ -14,7 +14,7 @@ class ContactsContainer extends React.Component {
 
     render() {
         return (
-            <Contacts usersContacts={this.props.usersContacts}/>
+            <Contacts getUpdateContact={this.props.getUpdateContact} usersContacts={this.props.usersContacts}/>
         );
     }
 }
@@ -30,6 +30,7 @@ let mapStateToProps = (state) => {
 export default connect(
     mapStateToProps,
     {
-        getContacts
+        getContacts,
+        getUpdateContact
     }
 )(ContactsContainer);

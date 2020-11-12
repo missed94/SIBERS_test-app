@@ -1,7 +1,9 @@
-.name {
 
+
+.Contact__item {
+  display: flex;
 }
 
-.name_active {
-color: red;
+.Contact__itemTitle {
+  font-weight: bolder;
 }
