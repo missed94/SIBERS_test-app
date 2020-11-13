@@ -2,11 +2,13 @@ import {contactsAPI} from "../../API/API";
 import {mappingArraysInObject} from "../../utils/helpers/helpers";
 
 const SET_CONTACTS = 'SET_CONTACTS';
-const UPDATE_CONTACT = 'UPDATE_CONTACT'
+const UPDATE_CONTACT = 'UPDATE_CONTACT';
+const IS_EDITING_IN_PROGRESS = 'IS_EDITING_IN_PROGRESS'
 
 
 let initialState = {
     usersContacts: [],
+    editingInProgress: []
 };
 
 
@@ -20,16 +22,28 @@ export const contactsReducer = (state = initialState, action) => {
         }
 
         case UPDATE_CONTACT: {
+            localStorage.setItem("contacts", JSON.stringify(mappingArraysInObject(
+                state.usersContacts,
+                'id',
+                action.contactData.id,
+                action.contactData
+            )))
+            let newContactData = JSON.parse(localStorage.getItem("contacts"))
             return {
                 ...state,
-                usersContacts: mappingArraysInObject(
-                    state.usersContacts,
-                    'id',
-                    action.contactData.id,
-                    action.contactData
-                )
+                usersContacts: newContactData
             }
 
+
+        }
+
+        case IS_EDITING_IN_PROGRESS: {
+            return {
+                ...state,
+                editingInProgress: action.isEditing//
+                    ? [...state.editingInProgress, action.contactId]
+                    : [...state.editingInProgress.filter(id => id !== action.contactId)]
+            }
         }
         default:
             return state;
@@ -47,6 +61,12 @@ const updateContact = (contactData) => ({
     contactData,
 });
 
+export const setEditingInProgress = (contactId, isEditing) => ({
+    type: IS_EDITING_IN_PROGRESS,
+    contactId,
+    isEditing
+})
+
 export const getContacts = () => {
     return async (dispatch) => {
         let data = await contactsAPI.getContacts()
@@ -56,8 +76,6 @@ export const getContacts = () => {
 
 export const getUpdateContact = (data) => {
     return async (dispatch) => {
-        await localStorage.setItem("data", JSON.stringify(data))
-        let contactData = await JSON.parse(localStorage.getItem("data"));
-        dispatch(updateContact(contactData))
+        dispatch(updateContact(data))
     }
 }

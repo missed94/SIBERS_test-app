@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import Contact from "./Contact/Contact";
-import ContactFormRedux from "./Contact-form/ContactForm";
 
 
 const Contacts = (props) => {
@@ -14,7 +13,9 @@ const Contacts = (props) => {
                     name={contact.name}
                     username={contact.username}
                     email={contact.email}
+                    editingInProgress={props.editingInProgress}
                     getUpdateContact={props.getUpdateContact}
+                    setEditingInProgress={props.setEditingInProgress}
                 />
         )
     })

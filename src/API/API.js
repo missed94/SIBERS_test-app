@@ -5,8 +5,13 @@ export const contactsAPI = {
     getContacts() {
         return axios.get('http://demo.sibers.com/users')
             .then(response => {
-                localStorage.setItem("contactsArray", JSON.stringify(response.data))
-                return JSON.parse(localStorage.getItem("contactsArray"));
+                if (localStorage.getItem("contacts") === null) {
+                    let contacts = response.data
+                    localStorage.setItem("contacts", JSON.stringify(contacts))
+                    return JSON.parse(localStorage.getItem("contacts"));
+                }
+                return JSON.parse(localStorage.getItem("contacts"));
+
             });
     },
 }
