@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Contact from "./Contact/Contact";
 
 
 const Contacts = (props) => {
