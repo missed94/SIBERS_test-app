@@ -8,7 +8,7 @@ const IS_EDITING_IN_PROGRESS = 'IS_EDITING_IN_PROGRESS'
 
 let initialState = {
     usersContacts: [],
-    editingInProgress: []
+    editingInProgress: null,
 };
 
 
@@ -38,11 +38,12 @@ export const contactsReducer = (state = initialState, action) => {
         }
 
         case IS_EDITING_IN_PROGRESS: {
+
             return {
                 ...state,
                 editingInProgress: action.isEditing//
-                    ? [...state.editingInProgress, action.contactId]
-                    : [...state.editingInProgress.filter(id => id !== action.contactId)]
+                    ? action.contactId
+                    : null,
             }
         }
         default:
@@ -56,7 +57,7 @@ const setContacts = (usersContacts) => ({
     usersContacts
 });
 
-const updateContact = (contactData) => ({
+export const updateContact = (contactData) => ({
     type: UPDATE_CONTACT,
     contactData,
 });
@@ -74,8 +75,11 @@ export const getContacts = () => {
     }
 }
 
-export const getUpdateContact = (data) => {
-    return async (dispatch) => {
-        dispatch(updateContact(data))
+export const getContactById = (id) => {
+    return async () => {
+        let data = await contactsAPI.getContacts();
+        return data.filter(item => item.id === id);
     }
 }
+
+

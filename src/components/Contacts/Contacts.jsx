@@ -4,7 +4,6 @@ import Contact from "./Contact/Contact";
 
 const Contacts = (props) => {
 
-    console.log(props.usersContacts)
     const contactsArray = props.usersContacts.map(contact => {
         return (
                  <Contact
@@ -14,8 +13,10 @@ const Contacts = (props) => {
                     username={contact.username}
                     email={contact.email}
                     editingInProgress={props.editingInProgress}
-                    getUpdateContact={props.getUpdateContact}
+                    updateContact={props.updateContact}
                     setEditingInProgress={props.setEditingInProgress}
+                    editMode={props.editMode}
+                    getContactById={props.getContactById}
                 />
         )
     })

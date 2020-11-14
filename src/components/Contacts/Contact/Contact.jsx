@@ -4,29 +4,28 @@ import ContactFormRedux from "../Contact-form/ContactForm";
 
 
 const Contact = (props) => {
-    const [editMode, setEditMode] = useState(false);
 
-    const editModeOn = () => {
-        setEditMode(true)
+    const editModeOn = async () => {
+        if (props.editingInProgress !== null)
+            await saveDataForm(props.getContactById(props.id));
         props.setEditingInProgress(props.id, true)
     }
 
     const editModeOff = () => {
-        setEditMode(false)
         props.setEditingInProgress(props.id, false)
     }
 
     const saveDataForm = (data) => {
-        props.getUpdateContact(data)
-            .then(() => {
-                editModeOff()
-            })
+        props.updateContact(data);
+        editModeOff();
     }
 
     return (
         <>
             {
-                !editMode && <li className={styles.Contact}>
+                //props.editingInProgress === null
+                props.editingInProgress !== props.id &&
+                <li className={styles.Contact}>
                     <div className={styles.Contact__item}>
                         <h4 className={styles.Contact__itemTitle}>Name:</h4>
                         <span className={styles.Contact__itemContent}>
@@ -50,8 +49,8 @@ const Contact = (props) => {
                     <button onClick={editModeOn}>Edit</button>
                 </li>
             }
-            {
-                editMode && <ContactFormRedux onSubmit={saveDataForm} initialValues={props} editModeOff={editModeOff}/>
+            {props.editingInProgress === props.id &&
+            <ContactFormRedux onSubmit={saveDataForm} initialValues={props} editModeOff={editModeOff}/>
             }
         </>
     )

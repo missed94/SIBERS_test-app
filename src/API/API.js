@@ -8,7 +8,7 @@ export const contactsAPI = {
                 if (localStorage.getItem("contacts") === null) {
                     let contacts = response.data
                     localStorage.setItem("contacts", JSON.stringify(contacts))
-                    return JSON.parse(localStorage.getItem("contacts"));
+                    //return JSON.parse(localStorage.getItem("contacts"));
                 }
                 return JSON.parse(localStorage.getItem("contacts"));
 
