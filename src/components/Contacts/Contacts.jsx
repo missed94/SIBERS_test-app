@@ -33,7 +33,7 @@ const Contacts = (props) => {
     return (
         <div className={styles.Contacts}>
             <label className={styles.sortBtn__container}>
-                <div className={styles.sortBtn}>Sort by name</div>
+                <div className={styles.sortBtn}>Sort by A-Z</div>
                 <button className={styles.sortBtnDefault} onClick={handleSortByName}>Sort by name</button>
             </label>
             <ul className={styles.Contacts__list}>

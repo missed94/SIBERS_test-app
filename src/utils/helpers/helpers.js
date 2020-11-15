@@ -6,3 +6,17 @@ export const mappingArraysInObject = (items, objPropName, actionPropName, newObj
         return item
     })
 }
+
+export const sortingArray = (direction, array, field) => {
+    if (!direction) {
+        sortingArrayByABC(array, field)
+    }
+    return array.reverse()
+}
+
+export const sortingArrayByABC = (array, field) => {
+    array.sort((a, b) => {
+        return a[field] > b[field] ? 1 : -1
+    })
+    return array
+}

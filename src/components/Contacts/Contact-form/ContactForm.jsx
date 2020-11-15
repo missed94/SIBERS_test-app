@@ -3,7 +3,6 @@ import styles from './ContactForm.module.scss'
 import {Field, reduxForm} from "redux-form";
 import {Input} from "../../common/FormsControls/FormControls";
 import {required} from "../../../utils/validators/validators";
-import handleSubmit from "redux-form/lib/handleSubmit";
 
 const ContactForm = (props) => {
     return (

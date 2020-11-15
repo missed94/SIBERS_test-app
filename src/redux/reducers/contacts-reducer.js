@@ -1,5 +1,5 @@
 import {contactsAPI} from "../../API/API";
-import {mappingArraysInObject} from "../../utils/helpers/helpers";
+import {mappingArraysInObject, sortingArray, sortingArrayByABC} from "../../utils/helpers/helpers";
 
 const SET_CONTACTS = 'SET_CONTACTS';
 const UPDATE_CONTACT = 'UPDATE_CONTACT';
@@ -12,13 +12,15 @@ let initialState = {
     editingInProgress: null,
 };
 
-
 export const contactsReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_CONTACTS: {
+
             return {
                 ...state,
-                usersContacts: action.usersContacts
+                usersContacts: action.usersContacts.sort((a, b) => {
+                    return a["name"] > b["name"] ? 1 : -1
+                })
             }
         }
 
@@ -32,7 +34,7 @@ export const contactsReducer = (state = initialState, action) => {
             let newContactData = JSON.parse(localStorage.getItem("contacts"))
             return {
                 ...state,
-                usersContacts: newContactData
+                usersContacts: sortingArrayByABC(newContactData, "name")
             }
         }
 
@@ -46,26 +48,15 @@ export const contactsReducer = (state = initialState, action) => {
         }
 
         case SORT_BY_NAME: {
-            if (!action.directionSort) {
-                sessionStorage.setItem("contacts", JSON.stringify(
-                    state.usersContacts.sort((a, b) => {
-                        return a[action.field] > b[action.field] ? 1 : -1
-                    })))
-            }
-            sessionStorage.setItem("contacts", JSON.stringify(
-                state.usersContacts.reverse()))
-
-            let sortData = JSON.parse(sessionStorage.getItem("contacts"))
             return {
                 ...state,
-                usersContacts: sortData
+                usersContacts: sortingArray(action.directionSort, state.usersContacts, action.field)
             }
         }
         default:
             return state;
     }
 }
-
 
 const setContacts = (usersContacts) => ({
     type: SET_CONTACTS,
