@@ -6,7 +6,7 @@ import {
     getContactById,
     getContacts,
     getUpdateContact,
-    setEditingInProgress, updateContact
+    setEditingInProgress, sortByName, updateContact
 } from "../../redux/reducers/contacts-reducer";
 
 
@@ -26,6 +26,7 @@ class ContactsContainer extends React.Component {
                 setEditingInProgress={this.props.setEditingInProgress}
                 editMode={this.props.editMode}
                 getContactById={this.props.getContactById}
+                sortByName={this.props.sortByName}
             />
         );
     }
@@ -46,8 +47,8 @@ export default connect(
     {
         getContacts,
         updateContact,
-        /*getUpdateContact,*/
         setEditingInProgress,
-        getContactById
+        getContactById,
+        sortByName
     }
 )(ContactsContainer);

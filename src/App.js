@@ -7,9 +7,9 @@ const App = () => {
 
     return (
         <div className="App">
-            <Route path="/"
-                   render={() => <ContactsContainer/>}>
-            </Route>
+            <div className="App__container">
+                <ContactsContainer/>
+            </div>
         </div>
     );
 }

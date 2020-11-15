@@ -4,6 +4,7 @@ import {mappingArraysInObject} from "../../utils/helpers/helpers";
 const SET_CONTACTS = 'SET_CONTACTS';
 const UPDATE_CONTACT = 'UPDATE_CONTACT';
 const IS_EDITING_IN_PROGRESS = 'IS_EDITING_IN_PROGRESS'
+const SORT_BY_NAME = 'SORT_BY_NAME'
 
 
 let initialState = {
@@ -33,17 +34,31 @@ export const contactsReducer = (state = initialState, action) => {
                 ...state,
                 usersContacts: newContactData
             }
-
-
         }
 
         case IS_EDITING_IN_PROGRESS: {
-
             return {
                 ...state,
                 editingInProgress: action.isEditing//
                     ? action.contactId
                     : null,
+            }
+        }
+
+        case SORT_BY_NAME: {
+            if (!action.directionSort) {
+                sessionStorage.setItem("contacts", JSON.stringify(
+                    state.usersContacts.sort((a, b) => {
+                        return a[action.field] > b[action.field] ? 1 : -1
+                    })))
+            }
+            sessionStorage.setItem("contacts", JSON.stringify(
+                state.usersContacts.reverse()))
+
+            let sortData = JSON.parse(sessionStorage.getItem("contacts"))
+            return {
+                ...state,
+                usersContacts: sortData
             }
         }
         default:
@@ -66,6 +81,12 @@ export const setEditingInProgress = (contactId, isEditing) => ({
     type: IS_EDITING_IN_PROGRESS,
     contactId,
     isEditing
+})
+
+export const sortByName = (field, directionSort) => ({
+    type: SORT_BY_NAME,
+    field,
+    directionSort
 })
 
 export const getContacts = () => {

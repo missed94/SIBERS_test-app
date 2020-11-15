@@ -25,28 +25,34 @@ const Contact = (props) => {
             {
                 //props.editingInProgress === null
                 props.editingInProgress !== props.id &&
-                <li className={styles.Contact}>
-                    <div className={styles.Contact__item}>
-                        <h4 className={styles.Contact__itemTitle}>Name:</h4>
-                        <span className={styles.Contact__itemContent}>
-                {props.name}
-                </span>
-                    </div>
+                <li onDoubleClick={editModeOn} className={styles.Contact}>
+                    <div className={styles.Contact__itemContainer}>
+                        <div className={styles.Contact__item}>
+                            <h4 className={styles.Contact__itemTitle}>Name:</h4>
+                            <span className={styles.Contact__itemContent}>
+                            {props.name}
+                        </span>
+                        </div>
 
-                    <div className={styles.Contact__item}>
-                        <h4 className={styles.Contact__itemTitle}>Nickname:</h4>
-                        <span className={styles.Contact__itemContent}>
-                {props.username}
-                </span>
+                        <div className={styles.Contact__item}>
+                            <h4 className={styles.Contact__itemTitle}>Nickname:</h4>
+                            <span className={styles.Contact__itemContent}>
+                            {props.username}
+                        </span>
+                        </div>
+                        <div className={styles.Contact__item}>
+                            <h4 className={styles.Contact__itemTitle}>Email:</h4>
+                            <span className={styles.Contact__itemContent}>
+                            {props.email}
+                        </span>
+                        </div>
                     </div>
-                    <div className={styles.Contact__item}>
-                        <h4 className={styles.Contact__itemTitle}>Email:</h4>
-                        <span className={styles.Contact__itemContent}>
-                {props.email}
-                </span>
+                    <div className={styles.Contact__btnContainer}>
+                        <label>
+                            <button className={styles.Contact__btnDefault} onClick={editModeOn}>Edit</button>
+                            <div className={styles.Contact__btn}>Edit</div>
+                        </label>
                     </div>
-
-                    <button onClick={editModeOn}>Edit</button>
                 </li>
             }
             {props.editingInProgress === props.id &&

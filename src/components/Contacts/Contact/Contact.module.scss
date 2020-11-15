@@ -1,9 +1,92 @@
+@import "src/mixins.scss";
 
+
+.Contact {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  justify-content: space-between;
+  border: #006aed 1px solid;
+  border-radius: 3px;
+  padding: 10px;
+
+  @include phones {
+    flex-direction: column;
+  }
+}
+
+.Contact__itemContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-left: -20px;
+  font-family: 'Montserrat', sans-serif;
+  width: 90%;
+  @include phones {
+    margin-left: -10;
+    margin-bottom: 5px;
+  }
+}
 
 .Contact__item {
+  width: 100%;
   display: flex;
+  align-items: center;
+  margin-left: 20px;
+  margin-bottom: 3px;
+  justify-content: space-between;
+
+  @include phones {
+    margin-left: 10px;
+    justify-content: space-between;
+  }
 }
 
 .Contact__itemTitle {
   font-weight: bolder;
+  margin-right: 5px;
+  font-size: 14px;
+  @include phones {
+    font-size: 12px;
+    margin-right: 2px;
+
+  }
+}
+
+.Contact__itemContent {
+  font-size: 14px;
+  @include phones {
+    font-size: 12px;
+  }
+}
+
+.Contact__btnContainer {
+  margin-left: 20px;
+  flex: 1;
+
+  @include phones {
+    margin-left: 0;
+  }
+}
+
+.Contact__btnDefault {
+  display: none;
+}
+
+.Contact__btn {
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: normal;
+  background: linear-gradient(90deg, #006aed, #3f35cb) 50%;
+  border: none;
+  color: #fff;
+  border-radius: 3px;
+  padding: 10px 20px;
+  text-align: center;
+
+  @include phones {
+    font-size: 12px;
+    padding: 8px 18px;
+  }
 }
