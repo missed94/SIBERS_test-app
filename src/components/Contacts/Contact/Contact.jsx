@@ -1,24 +1,28 @@
-import React, {useState} from 'react'
-import styles from './Contact.module.scss'
-import ContactFormRedux from "../Contact-form/ContactForm";
+//imports
+import React from 'react';
+import styles from './Contact.module.scss';
+import ContactFormRedux from '../Contact-form/ContactForm';
 
-
+//Contact component
 const Contact = (props) => {
 
+    //contact change edit mode on
     const editModeOn = async () => {
         if (props.editingInProgress !== null)
             await saveDataForm(props.getContactById(props.id));
-        props.setEditingInProgress(props.id, true)
-    }
+        props.setEditingInProgress(props.id, true);
+    };
 
+    //contact change edit mode off
     const editModeOff = () => {
-        props.setEditingInProgress(props.id, false)
-    }
+        props.setEditingInProgress(props.id, false);
+    };
 
+    // saving modified data
     const saveDataForm = (data) => {
         props.updateContact(data);
         editModeOff();
-    }
+    };
 
     return (
         <>
@@ -60,6 +64,6 @@ const Contact = (props) => {
             }
         </>
     )
-}
+};
 
-export default Contact
+export default Contact;

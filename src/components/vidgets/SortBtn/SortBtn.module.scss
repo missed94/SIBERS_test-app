@@ -1,0 +1,24 @@
+@import "src/mixins.scss";
+
+.sortBtn__container {
+}
+
+.sortBtnDefault {
+  display: none;
+}
+
+.sortBtn{
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: normal;
+  background: linear-gradient(90deg, #006aed, #3f35cb) 50%;
+  border: none;
+  color: #fff;
+  border-radius: 3px;
+  padding: 10px 20px;
+  text-align: center;
+  @include phones {
+    font-size: 12px;
+    padding: 8px 18px;
+  }
+}

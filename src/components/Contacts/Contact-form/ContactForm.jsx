@@ -1,9 +1,13 @@
+//imports
 import React from 'react'
 import styles from './ContactForm.module.scss'
 import {Field, reduxForm} from "redux-form";
 import {Input} from "../../common/FormsControls/FormControls";
 import {required} from "../../../utils/validators/validators";
 
+
+
+//Contact form component
 const ContactForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={styles.ContactForm}>
@@ -16,7 +20,6 @@ const ContactForm = (props) => {
                            placeholder={"Enter name"}
                            validate={[required]}/>
                 </div>
-
                 <div className={styles.ContactForm__row}>
                     <h4 className={styles.ContactForm__rowTitle}>Nickname:</h4>
                     <Field className={styles.ContactForm__rowContent}
@@ -40,11 +43,12 @@ const ContactForm = (props) => {
                     <div className={styles.ContactForm__btn}>Save</div>
                 </label>
             </div>
-
         </form>
     )
 }
 
+
+//HOC by redux-form
 const ContactFormRedux = reduxForm({
     form: 'contact-data',
 })(ContactForm)

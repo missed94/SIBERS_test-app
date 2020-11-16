@@ -3,20 +3,20 @@ export const mappingArraysInObject = (items, objPropName, actionPropName, newObj
         if (item[objPropName] === actionPropName) {
             return {...item, ...newObjProps}
         }
-        return item
-    })
-}
+        return item;
+    });
+};
 
 export const sortingArray = (direction, array, field) => {
     if (!direction) {
-        sortingArrayByABC(array, field)
+        sortingArrayByABC(array, field);
     }
-    return array.reverse()
-}
+    return array.reverse();
+};
 
 export const sortingArrayByABC = (array, field) => {
     array.sort((a, b) => {
-        return a[field] > b[field] ? 1 : -1
-    })
-    return array
-}
+        return a[field].toLowerCase() > b[field].toLowerCase() ? 1 : -1;
+    });
+    return array;
+};

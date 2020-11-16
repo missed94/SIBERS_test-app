@@ -1,21 +1,21 @@
 
-import React from 'react'
-import Contacts from "./Contacts";
+import React from 'react';
+import Contacts from './Contacts';
 import {connect} from "react-redux";
 import {
     getContactById,
     getContacts,
-    getUpdateContact,
-    setEditingInProgress, sortByName, updateContact
-} from "../../redux/reducers/contacts-reducer";
+    setEditingInProgress,
+    updateContact
+} from '../../redux/reducers/contacts-reducer';
 
 
 class ContactsContainer extends React.Component {
 
 
-    componentDidMount() { //жизненный цикл, встроенный объект
-        this.props.getContacts()
-    }
+    componentDidMount() {
+        this.props.getContacts();
+    };
 
     render() {
         return (
@@ -24,23 +24,18 @@ class ContactsContainer extends React.Component {
                 usersContacts={this.props.usersContacts}
                 editingInProgress={this.props.editingInProgress}
                 setEditingInProgress={this.props.setEditingInProgress}
-                editMode={this.props.editMode}
                 getContactById={this.props.getContactById}
-                sortByName={this.props.sortByName}
             />
         );
-    }
+    };
 }
-
 
 let mapStateToProps = (state) => {
     return {
         usersContacts: state.contacts.usersContacts,
         editingInProgress: state.contacts.editingInProgress,
-        editMode: state.contacts.editMode
-    }
-}
-
+    };
+};
 
 export default connect(
     mapStateToProps,
@@ -49,6 +44,5 @@ export default connect(
         updateContact,
         setEditingInProgress,
         getContactById,
-        sortByName
     }
 )(ContactsContainer);

@@ -1,18 +1,40 @@
-import React, {useState} from "react"
-import Contact from "./Contact/Contact";
-import styles from "./Contacts.module.scss"
+//imports
+import React, {useEffect, useState} from 'react';
+import Contact from './Contact/Contact';
+import styles from './Contacts.module.scss';
+import SortBtn from '../vidgets/SortBtn/SortBtn';
+import SearchByName from '../vidgets/SearchByName/SearchByName';
 
-
+//Contacts component
 const Contacts = (props) => {
 
-    const [directionSort, setDirectionSort] = useState(false)
+    // local state by useState hook
+    const [directionSort, setDirectionSort] = useState(false);
+    const [search, setSearch] = useState('');
+    const [filteredContactsArray, setFilteredContactsArray] = useState([]);
 
-    const handleSortByName = () => {
-        setDirectionSort(!directionSort)
-        props.sortByName("name", directionSort)
-    }
 
-    const contactsArray = props.usersContacts.map(contact => {
+    const sortByName = () => {
+        setDirectionSort(!directionSort);
+        setFilteredContactsArray(() => {
+            if (!directionSort) {
+                filteredContactsArray.sort((a, b) => {
+                    return a["name"].toLowerCase() > b["name"].toLowerCase() ? 1 : -1
+                });
+            }
+            return filteredContactsArray.reverse()
+        });
+    };
+
+    //Search filter by name
+    useEffect(() => {
+        setFilteredContactsArray(props.usersContacts.filter(contact => {
+            return contact.name.toLowerCase().includes(search.toLowerCase())
+        }));
+    }, [search, props.usersContacts]);
+
+    // displaying filtered array
+    const contactsArray = filteredContactsArray.map(contact => {
         return (
             <Contact
                 key={contact.id}
@@ -26,21 +48,24 @@ const Contacts = (props) => {
                 editMode={props.editMode}
                 getContactById={props.getContactById}
             />
-        )
-    })
+        );
+    });
 
 
     return (
         <div className={styles.Contacts}>
-            <label className={styles.sortBtn__container}>
-                <div className={styles.sortBtn}>Sort by A-Z</div>
-                <button className={styles.sortBtnDefault} onClick={handleSortByName}>Sort by name</button>
-            </label>
-            <ul className={styles.Contacts__list}>
-                {contactsArray}
-            </ul>
+            <div className={styles.Contacts__widgetsContainer}>
+                {directionSort && <SortBtn handleSortByName={sortByName} text="Sort by A-Z"/>}
+                {!directionSort && <SortBtn handleSortByName={sortByName} text="Sort by Z-A"/>}
+                <SearchByName handleOnChange={e => setSearch(e.target.value)}/>
+            </div>
+            {!filteredContactsArray.length
+                ? <div className={styles.Contacts__notFound}>Nothing found...</div>
+                : <ul className={styles.Contacts__list}>
+                    {contactsArray}
+                </ul>}
         </div>
     )
-}
+};
 
-export default Contacts
+export default Contacts;

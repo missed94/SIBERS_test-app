@@ -1,6 +1,8 @@
+//imports
 import axios from "axios";
 
 
+//server request for contacts array
 export const contactsAPI = {
     getContacts() {
         return axios.get('http://demo.sibers.com/users')
