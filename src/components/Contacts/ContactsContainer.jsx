@@ -17,6 +17,8 @@ class ContactsContainer extends React.Component {
         this.props.getContacts();
     };
 
+
+
     render() {
         return (
             <Contacts

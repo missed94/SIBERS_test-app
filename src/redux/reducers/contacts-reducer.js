@@ -22,7 +22,6 @@ export const contactsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 usersContacts: sortingArrayByABC(action.usersContacts, 'name') //helper function from "utils/helpers/helpers.js"
-
             };
         }
         case UPDATE_CONTACT: {
@@ -52,7 +51,6 @@ export const contactsReducer = (state = initialState, action) => {
             return state;
     }
 }
-
 
 //action creators
 const setContacts = (usersContacts) => ({
